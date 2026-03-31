@@ -49,7 +49,7 @@ export function createEducationItem() {
 }
 
 export function createSkillItem() {
-  return { id: uuidv4(), name: '', level: undefined as never, category: '' }
+  return { id: uuidv4(), name: '', category: '' }
 }
 
 export function createProjectItem() {
@@ -61,5 +61,5 @@ export function createCertificationItem() {
 }
 
 export function createLanguageItem() {
-  return { id: uuidv4(), name: '', level: undefined as never }
+  return { id: uuidv4(), name: '' }
 }

@@ -4,6 +4,7 @@ import * as cookie from 'cookie'
 import path from 'path'
 import fs from 'fs/promises'
 import { existsSync } from 'fs'
+import { isSafeSessionId } from './security'
 
 export const SESSION_COOKIE_NAME = 'cv_session_id'
 export const SESSION_TTL_MS = 2 * 60 * 60 * 1000 // 2 hours
@@ -29,12 +30,11 @@ export function setSessionCookie(response: NextResponse, sessionId: string): voi
 }
 
 export function getSessionDir(sessionId: string): string {
-  // Prevent path traversal
-  const sanitized = sessionId.replace(/[^a-zA-Z0-9-]/g, '')
-  if (!sanitized || sanitized !== sessionId) {
+  // Validate full UUID v4 format to prevent path traversal
+  if (!isSafeSessionId(sessionId)) {
     throw new Error('Invalid session ID')
   }
-  return path.join(TMP_DIR, sanitized)
+  return path.join(TMP_DIR, sessionId)
 }
 
 export async function ensureSessionDir(sessionId: string): Promise<string> {
