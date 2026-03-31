@@ -1,0 +1,111 @@
+{
+  "id": "sample-cv-001",
+  "personal": {
+    "fullName": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "phone": "+1 555 123 4567",
+    "location": "San Francisco, CA",
+    "website": "https://janesmith.dev",
+    "linkedin": "https://linkedin.com/in/janesmith",
+    "github": "https://github.com/janesmith",
+    "title": "Senior Software Engineer"
+  },
+  "summary": "Experienced software engineer with 8+ years of expertise in full-stack development, specializing in React, TypeScript, and cloud infrastructure. Passionate about building scalable applications and leading cross-functional teams.",
+  "experience": [
+    {
+      "id": "exp-001",
+      "company": "TechCorp Inc.",
+      "role": "Senior Software Engineer",
+      "startDate": "Jan 2021",
+      "endDate": "",
+      "current": true,
+      "description": "Lead frontend architecture for enterprise SaaS platform",
+      "bullets": [
+        "Architected React + TypeScript frontend serving 50,000+ daily active users",
+        "Reduced page load time by 40% through code splitting and lazy loading",
+        "Mentored 4 junior engineers and established code review best practices",
+        "Led migration from class components to React Hooks, reducing codebase by 20%"
+      ],
+      "location": "San Francisco, CA"
+    },
+    {
+      "id": "exp-002",
+      "company": "StartupXYZ",
+      "role": "Full Stack Developer",
+      "startDate": "Mar 2018",
+      "endDate": "Dec 2020",
+      "current": false,
+      "description": "Built and maintained full-stack web applications",
+      "bullets": [
+        "Developed REST API using Node.js and Express serving 1M+ requests/day",
+        "Implemented CI/CD pipeline using GitHub Actions reducing deployment time by 60%",
+        "Built real-time features using WebSocket for live collaboration"
+      ],
+      "location": "Remote"
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-001",
+      "institution": "University of California, Berkeley",
+      "degree": "Bachelor of Science",
+      "field": "Computer Science",
+      "startDate": "Sep 2012",
+      "endDate": "May 2016",
+      "gpa": "3.8/4.0",
+      "description": ""
+    }
+  ],
+  "skills": [
+    { "id": "skill-001", "name": "React", "level": "expert", "category": "Frontend" },
+    { "id": "skill-002", "name": "TypeScript", "level": "expert", "category": "Languages" },
+    { "id": "skill-003", "name": "Node.js", "level": "advanced", "category": "Backend" },
+    { "id": "skill-004", "name": "PostgreSQL", "level": "advanced", "category": "Databases" },
+    { "id": "skill-005", "name": "AWS", "level": "advanced", "category": "Cloud" },
+    { "id": "skill-006", "name": "Docker", "level": "intermediate", "category": "DevOps" },
+    { "id": "skill-007", "name": "Python", "level": "intermediate", "category": "Languages" },
+    { "id": "skill-008", "name": "GraphQL", "level": "advanced", "category": "APIs" }
+  ],
+  "projects": [
+    {
+      "id": "proj-001",
+      "name": "OpenSource Dashboard",
+      "description": "A real-time analytics dashboard built with React and D3.js, processing data from 10+ data sources",
+      "url": "https://github.com/janesmith/oss-dashboard",
+      "technologies": ["React", "D3.js", "TypeScript", "WebSocket"],
+      "startDate": "Jun 2022",
+      "endDate": "Dec 2022"
+    }
+  ],
+  "certifications": [
+    {
+      "id": "cert-001",
+      "name": "AWS Certified Solutions Architect",
+      "issuer": "Amazon Web Services",
+      "date": "Mar 2023",
+      "expiryDate": "Mar 2026",
+      "credentialId": "AWS-SA-12345",
+      "url": "https://aws.amazon.com/certification/certified-solutions-architect-associate/"
+    }
+  ],
+  "languages": [
+    { "id": "lang-001", "name": "English", "level": "native" },
+    { "id": "lang-002", "name": "Spanish", "level": "intermediate" }
+  ],
+  "customization": {
+    "templateId": "modern",
+    "fontFamily": "Inter",
+    "fontSize": 11,
+    "lineHeight": 1.5,
+    "primaryColor": "#2563eb",
+    "secondaryColor": "#64748b",
+    "backgroundColor": "#ffffff",
+    "textColor": "#1e293b",
+    "spacing": "normal",
+    "sectionOrder": ["personal", "summary", "experience", "education", "skills", "projects", "certifications", "languages"],
+    "hiddenSections": [],
+    "paperSize": "a4"
+  },
+  "createdAt": "2024-01-15T10:00:00.000Z",
+  "updatedAt": "2024-01-15T10:00:00.000Z"
+}
