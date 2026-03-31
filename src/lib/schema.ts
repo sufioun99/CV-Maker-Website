@@ -89,6 +89,8 @@ export const TemplateCustomizationSchema = z.object({
   ]),
   hiddenSections: z.array(z.string()).default([]),
   paperSize: z.enum(['a4', 'letter']).default('a4'),
+  photoShape: z.enum(['circle', 'rounded', 'square']).default('circle'),
+  showPhoto: z.boolean().default(true),
 })
 
 export const CVSchema = z.object({
