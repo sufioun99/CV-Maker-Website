@@ -19,7 +19,8 @@ test.describe('CV Maker E2E Smoke Tests', () => {
 
     // Should have 6+ template cards with "Use This Template" buttons
     const templateButtons = page.locator('button', { hasText: 'Use This Template' })
-    await expect(templateButtons).toHaveCount(6)
+    const templateCount = await templateButtons.count()
+    expect(templateCount).toBeGreaterThanOrEqual(6)
   })
 
   test('3. Create a manual CV and navigate to editor', async ({ page }) => {

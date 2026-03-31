@@ -13,7 +13,9 @@ export const TMP_DIR = path.join(process.cwd(), '.tmp')
 export function getSessionId(req: NextRequest): string | null {
   const cookieHeader = req.headers.get('cookie') || ''
   const cookies = cookie.parse(cookieHeader)
-  return cookies[SESSION_COOKIE_NAME] || null
+  const value = cookies[SESSION_COOKIE_NAME] || null
+  if (!value || !isSafeSessionId(value)) return null
+  return value
 }
 
 export function createSessionId(): string {
@@ -26,6 +28,7 @@ export function setSessionCookie(response: NextResponse, sessionId: string): voi
     sameSite: 'lax',
     path: '/',
     maxAge: SESSION_TTL_MS / 1000,
+    secure: process.env.NODE_ENV === 'production',
   })
 }
 
@@ -50,6 +53,8 @@ export async function getOrCreateSession(req: NextRequest, res: NextResponse): P
   }
   setSessionCookie(res, sessionId)
   await ensureSessionDir(sessionId)
+  // Opportunistically clean up expired sessions on each new/existing session access
+  cleanExpiredSessions().catch(() => {})
   return sessionId
 }
 

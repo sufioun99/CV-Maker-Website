@@ -52,26 +52,31 @@ export default function TailorPage() {
       if (!confirmed) return
     }
 
-    setAppliedSuggestions(prev => { const next = new Set(prev); next.add(suggestion.id); return next })
-
     try {
-      const cvRes = await fetch('/api/cv')
-      const cvData = await cvRes.json()
-      if (!cvData.cv) return
-
+      // Currently, automatic application is only supported for REWRITE suggestions on the summary.
       if (suggestion.type === 'REWRITE' && suggestion.section === 'summary') {
-        await fetch('/api/cv', {
+        const res = await fetch('/api/cv', {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ summary: suggestion.suggested }),
         })
+
+        if (!res.ok) {
+          throw new Error('Failed to apply summary rewrite')
+        }
+
+        // Only mark as applied after a successful update.
+        setAppliedSuggestions(prev => {
+          const next = new Set(prev)
+          next.add(suggestion.id)
+          return next
+        })
+      } else {
+        // For unsupported types, inform the user instead of incorrectly marking as applied.
+        alert('Automatic application is not yet supported for this suggestion type. Please apply this change manually to your CV.')
       }
     } catch {
-      setAppliedSuggestions(prev => {
-        const next = new Set(prev)
-        next.delete(suggestion.id)
-        return next
-      })
+      alert('Failed to apply this suggestion automatically. Please try again or edit your CV manually.')
     }
   }
 
