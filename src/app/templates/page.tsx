@@ -51,6 +51,9 @@ export default function TemplatesPage() {
     setError('')
 
     try {
+      // Ensure session/CV exists so the API has a valid session cookie
+      await fetch('/api/cv', { method: 'POST' })
+
       const formData = new FormData()
       formData.append('image', imageFile)
 

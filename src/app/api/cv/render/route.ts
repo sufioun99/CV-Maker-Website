@@ -179,7 +179,7 @@ function generateCVHtml(cv: ReturnType<typeof CVSchema.parse>): string {
 </html>`
 }
 
-async function generatePDF(html: string): Promise<Buffer> {
+async function generatePDF(html: string, paperSize: 'a4' | 'letter' = 'a4'): Promise<Buffer> {
   try {
     const { chromium } = await import('playwright')
     const browser = await chromium.launch({
@@ -188,7 +188,7 @@ async function generatePDF(html: string): Promise<Buffer> {
     const page = await browser.newPage()
     await page.setContent(html, { waitUntil: 'networkidle' })
     const pdfBuffer = await page.pdf({
-      format: 'A4',
+      format: paperSize === 'letter' ? 'Letter' : 'A4',
       printBackground: true,
       margin: { top: '0', right: '0', bottom: '0', left: '0' },
     })
@@ -351,7 +351,7 @@ export async function GET(req: NextRequest) {
   try {
     if (format === 'pdf') {
       const html = generateCVHtml(cv)
-      const pdfBuffer = await generatePDF(html)
+      const pdfBuffer = await generatePDF(html, cv.customization.paperSize)
       return new NextResponse(new Uint8Array(pdfBuffer), {
         headers: {
           'Content-Type': 'application/pdf',

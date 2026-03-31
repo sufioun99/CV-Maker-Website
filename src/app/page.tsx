@@ -90,7 +90,7 @@ export default function HomePage() {
         <section className="py-8 bg-gray-50 border-t">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <p className="text-sm text-gray-500">
-              🔒 Privacy first: All data is stored only in your browser session and auto-deleted after 2 hours.
+              🔒 Privacy first: All data is stored temporarily on the server (tied to your session cookie) and auto-deleted after 2 hours.
               No account required.&nbsp;
               <Link href="/session" className="text-blue-600 hover:underline">Manage your session</Link>
             </p>
