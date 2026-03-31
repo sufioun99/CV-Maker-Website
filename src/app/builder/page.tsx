@@ -3,6 +3,9 @@ import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import Navbar from '@/components/Navbar'
+import type { ExtractionResult } from '@/lib/schema'
+
+type UploadResult = { extraction: ExtractionResult; message: string }
 
 function BuilderContent() {
   const router = useRouter()
@@ -11,7 +14,7 @@ function BuilderContent() {
   const [activeTab, setActiveTab] = useState<'manual' | 'upload'>(mode === 'upload' ? 'upload' : 'manual')
   const [uploadFile, setUploadFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
-  const [uploadResult, setUploadResult] = useState<any>(null)
+  const [uploadResult, setUploadResult] = useState<UploadResult | null>(null)
   const [error, setError] = useState('')
   const [creating, setCreating] = useState(false)
 

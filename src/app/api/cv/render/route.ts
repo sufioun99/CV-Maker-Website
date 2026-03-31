@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getSessionId, readSessionCV } from '@/lib/session'
 import { CVSchema } from '@/lib/schema'
 import { getTemplate } from '@/lib/templates'
+import type { Paragraph } from 'docx'
 
 function escapeHtml(str: string): string {
   return str
@@ -204,7 +205,7 @@ async function generateDOCX(cv: ReturnType<typeof CVSchema.parse>): Promise<Buff
 
   const primaryColor = cv.customization.primaryColor.replace('#', '')
 
-  const paragraphs: any[] = []
+  const paragraphs: Paragraph[] = []
 
   paragraphs.push(
     new Paragraph({
