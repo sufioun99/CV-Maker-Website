@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { CVSchema } from '@/lib/schema'
-import { getSessionId, readSessionCV, writeSessionCV, getOrCreateSession, SESSION_COOKIE_NAME } from '@/lib/session'
+import { CVSchema, type CV } from '@/lib/schema'
+import { getSessionId, readSessionCV, writeSessionCV, getOrCreateSession } from '@/lib/session'
 import { createDefaultCV } from '@/lib/cv-defaults'
 
 export async function GET(req: NextRequest) {
@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const res = NextResponse.json({ cv: null } as any)
+  const res = NextResponse.json<{ cv: CV | null }>({ cv: null })
   const sessionId = await getOrCreateSession(req, res)
 
   const existing = await readSessionCV(sessionId)

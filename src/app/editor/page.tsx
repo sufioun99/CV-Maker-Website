@@ -202,7 +202,7 @@ function SummarySection({ cv, onChange }: { cv: CV; onChange: (u: Partial<CV>) =
 function ExperienceSection({ cv, onChange }: { cv: CV; onChange: (u: Partial<CV>) => void }) {
   const addItem = () => onChange({ experience: [...cv.experience, createExperienceItem()] })
   const removeItem = (id: string) => onChange({ experience: cv.experience.filter(e => e.id !== id) })
-  const updateItem = (id: string, field: string, val: any) => onChange({
+  const updateItem = (id: string, field: string, val: unknown) => onChange({
     experience: cv.experience.map(e => e.id === id ? { ...e, [field]: val } : e)
   })
   const addBullet = (id: string) => onChange({
@@ -339,7 +339,7 @@ function SkillsSection({ cv, onChange }: { cv: CV; onChange: (u: Partial<CV>) =>
 function ProjectsSection({ cv, onChange }: { cv: CV; onChange: (u: Partial<CV>) => void }) {
   const addItem = () => onChange({ projects: [...cv.projects, createProjectItem()] })
   const removeItem = (id: string) => onChange({ projects: cv.projects.filter(p => p.id !== id) })
-  const updateItem = (id: string, field: string, val: any) => onChange({
+  const updateItem = (id: string, field: string, val: unknown) => onChange({
     projects: cv.projects.map(p => p.id === id ? { ...p, [field]: val } : p)
   })
 
@@ -407,7 +407,7 @@ function CertificationsSection({ cv, onChange }: { cv: CV; onChange: (u: Partial
 function LanguagesSection({ cv, onChange }: { cv: CV; onChange: (u: Partial<CV>) => void }) {
   const addItem = () => onChange({ languages: [...cv.languages, createLanguageItem()] })
   const removeItem = (id: string) => onChange({ languages: cv.languages.filter(l => l.id !== id) })
-  const updateItem = (id: string, field: string, val: any) => onChange({
+  const updateItem = (id: string, field: string, val: unknown) => onChange({
     languages: cv.languages.map(l => l.id === id ? { ...l, [field]: val } : l)
   })
 
@@ -442,7 +442,7 @@ function LanguagesSection({ cv, onChange }: { cv: CV; onChange: (u: Partial<CV>)
 
 function CustomizeSection({ cv, onChange }: { cv: CV; onChange: (u: Partial<CV>) => void }) {
   const c = cv.customization
-  const update = (field: string, val: any) => onChange({ customization: { ...c, [field]: val } })
+  const update = (field: string, val: unknown) => onChange({ customization: { ...c, [field]: val } })
 
   return (
     <div className="space-y-4">

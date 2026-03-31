@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSessionId, ensureSessionDir } from '@/lib/session'
 import { validateMimeType, sanitizeFilename, ALLOWED_CV_MIME_TYPES, MAX_CV_SIZE_BYTES } from '@/lib/security'
-import { CVSchema, type ExtractionResult } from '@/lib/schema'
+import { type ExtractionResult } from '@/lib/schema'
 import { createDefaultCV } from '@/lib/cv-defaults'
 import path from 'path'
 import fs from 'fs/promises'
@@ -96,8 +96,6 @@ function parseSkillsFromText(text: string): Array<{ id: string; name: string; ca
   return skills.slice(0, 30).map(name => ({ id: uuidv4(), name, category: '' }))
 }
 
-export const config = { api: { bodyParser: false } }
-
 export async function POST(req: NextRequest) {
   const sessionId = getSessionId(req)
   if (!sessionId) {
@@ -136,14 +134,12 @@ export async function POST(req: NextRequest) {
   await fs.writeFile(uploadPath, buffer)
 
   let extractedText = ''
-  let numPages = 1
   const warnings: string[] = []
 
   try {
     if (file.type === 'application/pdf') {
       const result = await extractFromPDF(buffer)
       extractedText = result.text
-      numPages = result.numPages
     } else {
       const result = await extractFromDOCX(buffer)
       extractedText = result.text

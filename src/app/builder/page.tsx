@@ -3,6 +3,9 @@ import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import Navbar from '@/components/Navbar'
+import type { ExtractionResult, ExtractedField } from '@/lib/schema'
+
+type UploadResult = { extraction: ExtractionResult; message: string }
 
 function BuilderContent() {
   const router = useRouter()
@@ -11,7 +14,7 @@ function BuilderContent() {
   const [activeTab, setActiveTab] = useState<'manual' | 'upload'>(mode === 'upload' ? 'upload' : 'manual')
   const [uploadFile, setUploadFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
-  const [uploadResult, setUploadResult] = useState<any>(null)
+  const [uploadResult, setUploadResult] = useState<UploadResult | null>(null)
   const [error, setError] = useState('')
   const [creating, setCreating] = useState(false)
 
@@ -171,7 +174,7 @@ function BuilderContent() {
                   <div className="mb-4">
                     <h3 className="font-medium mb-2">Extracted Fields:</h3>
                     <div className="space-y-2">
-                      {Object.entries(uploadResult.extraction.extractedFields).map(([key, field]: [string, any]) => (
+                      {Object.entries(uploadResult.extraction.extractedFields).map(([key, field]: [string, ExtractedField]) => (
                         <div key={key} className="flex items-center gap-3 p-2 bg-gray-50 rounded text-sm">
                           <span className="font-medium text-gray-700 w-36">{key}</span>
                           <span className="flex-1 text-gray-900">{String(field.value).substring(0, 50)}</span>

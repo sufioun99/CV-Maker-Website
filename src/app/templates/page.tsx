@@ -3,13 +3,18 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import { BUILT_IN_TEMPLATES } from '@/lib/templates'
+import type { DerivedTemplate } from '@/lib/schema'
+
+type DeriveSuccess = { fallback?: false; template: DerivedTemplate; note: string }
+type DeriveFallback = { fallback: true; message: string }
+type DeriveResult = DeriveSuccess | DeriveFallback
 
 export default function TemplatesPage() {
   const router = useRouter()
   const [selecting, setSelecting] = useState<string | null>(null)
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [deriving, setDeriving] = useState(false)
-  const [deriveResult, setDeriveResult] = useState<any>(null)
+  const [deriveResult, setDeriveResult] = useState<DeriveResult | null>(null)
   const [error, setError] = useState('')
 
   const handleSelectTemplate = async (templateId: string) => {
@@ -35,7 +40,7 @@ export default function TemplatesPage() {
       }
 
       router.push('/editor')
-    } catch (e) {
+    } catch {
       setError('Failed to select template. Please try again.')
     } finally {
       setSelecting(null)
@@ -75,7 +80,7 @@ export default function TemplatesPage() {
       } else {
         setError(data.error || 'Failed to analyze image')
       }
-    } catch (e) {
+    } catch {
       setError('Failed to analyze image')
     } finally {
       setDeriving(false)
